@@ -7,11 +7,17 @@ class Solution:
 
         intersection = []
 
-        for i in range(n):
-            for j in range(m):                
-                lower = max(firstList[i][0], secondList[j][0])
-                upper = min(firstList[i][1], secondList[j][1])
-                if lower <= upper:
-                    intersection.append([lower, upper])
+        l = 0
+        r = 0
+        while l<n and r<m:               
+            lower = max(firstList[l][0], secondList[r][0])
+            upper = min(firstList[l][1], secondList[r][1])
+            if lower <= upper:
+                intersection.append([lower, upper])
+                
+            if firstList[l][1] < secondList[r][1]:
+                l += 1
+            else:
+                r += 1
 
         return intersection
