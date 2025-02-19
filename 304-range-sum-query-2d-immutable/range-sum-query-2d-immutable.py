@@ -7,7 +7,6 @@ class NumMatrix:
 
         for row in range(len(self.matrix)):
             for col in range(len(self.matrix[0])):
-                self.matrix[row][col] = self.matrix[row][col]
                 if isBound(row-1, col):
                     self.matrix[row][col] += self.matrix[row-1][col]
                 if isBound(row, col-1):
