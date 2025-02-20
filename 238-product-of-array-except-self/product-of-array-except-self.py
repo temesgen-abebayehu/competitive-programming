@@ -16,8 +16,7 @@ class Solution:
             sufix.append(pro2)
             l += 1
             r -= 1
-        print(prefix)
-        print(sufix)
+            
         nums[0] = sufix[n-2]
         l = 0
         for r in range(1, n):
