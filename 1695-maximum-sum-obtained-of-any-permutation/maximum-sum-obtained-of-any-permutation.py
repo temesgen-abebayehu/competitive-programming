@@ -1,9 +1,7 @@
 class Solution:
     def maxSumRangeQuery(self, nums: List[int], requests: List[List[int]]) -> int:
         nums.sort(reverse=True)
-        max_num = 0
-        for i, j in requests:
-            max_num = max(max_num, j)
+        max_num = len(nums) + 1
         
         prefix = [0] * (max_num + 1)
         for i, j in requests:
@@ -14,25 +12,10 @@ class Solution:
         for i in range(1, len(prefix)):
             prefix[i] += prefix[i - 1]
 
-        count = {}
-        for idx, val in enumerate(prefix):
-            if val > 0:
-                count[idx] = val
-        count = sorted(count.items(), key=lambda x: x[1], reverse=True)
-
-        arr = [0] * len(nums)
-        i = 0
-        for c in count:
-            arr[c[0]] = nums[i]
-            i += 1
-
-        for i in range(1, len(arr)):
-            arr[i] += arr[i - 1]
-
+        prefix.sort(reverse=True)
         ans = 0
-        for i, j in requests:
-            ans += arr[j]
-            if i > 0:
-                ans -= arr[i - 1]
+        for i in range(len(nums)):
+            ans += (prefix[i] * nums[i])
+                
         return ans%(10**9 + 7)
             
