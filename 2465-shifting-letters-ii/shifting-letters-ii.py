@@ -1,20 +1,20 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        prefix = [0] * 50001
+        prefix = [0] * (len(s) + 1)
         
         # add cut point
         for i, j, d in shifts:
             if d == 0:
                 prefix[i] += -1
-                if j < 50001:
+                if j < len(s):
                     prefix[j + 1] += 1
             else:
                 prefix[i] += 1
-                if j < 50001:
+                if j < len(s):
                     prefix[j + 1] += -1
 
         # sum each
-        for i in range(1, 50001):
+        for i in range(1, len(s)):
             prefix[i] += prefix[i - 1]
         
         # operate shift
