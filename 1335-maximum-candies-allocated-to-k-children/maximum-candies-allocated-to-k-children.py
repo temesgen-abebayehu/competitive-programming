@@ -1,7 +1,6 @@
 class Solution:
     def maximumCandies(self, candies: List[int], k: int) -> int:
         #validater function
-        @lru_cache(maxsize=None)
         def isValidate(mid):
             if mid == 0:
                 return True
