@@ -1,5 +1,6 @@
 class Solution:
     def predictTheWinner(self, nums: List[int]) -> bool:
+        @lru_cache(maxsize=None)
         def helper(left, right):
             if left == right:
                 return nums[left]
