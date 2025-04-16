@@ -9,21 +9,9 @@ class Solution:
         if not root:
             return TreeNode(val)
 
-        curr = TreeNode(val)
-        def bst(root):     
-            if root.val > val:
-                if not root.left:                    
-                    root.left = curr
-                    return 
+        if root.val > val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
 
-                bst(root.left)
-                
-            elif root.val < val:
-                if not root.right:
-                    root.right = curr
-                    return 
-                    
-                bst(root.right)
-
-        bst(root)
         return root
