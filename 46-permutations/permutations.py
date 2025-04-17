@@ -9,5 +9,6 @@ class Solution:
                 nums[l], nums[i] = nums[i], nums[l]
                 backtrack(l+1, r)
                 nums[l], nums[i] = nums[i], nums[l]
+            return
         backtrack(0, len(nums))
         return self.ans
