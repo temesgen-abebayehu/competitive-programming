@@ -6,15 +6,18 @@ class Solution:
         def in_bound(i, j):
             return 0 <= i < r_len and 0 <= j < c_len
 
-        visited = set()
+        
         que = deque([[sr,sc]])
         dir = [[1,0], [0,1], [-1,0], [0,-1]]
+        orig_col = image[sr][sc]
+        
+        if image[sr][sc] == color:
+            return image
 
         while que:
             r, c = que.popleft()
-            for i, j in dir:
-                if in_bound(r+i, c+j) and (r+i, c+j) not in visited and image[r+i][c+j] == image[r][c]:
-                    que.append([r+i, c+j])
-                    visited.add((r+i, c+j))
             image[r][c] = color
+            for i, j in dir:
+                if in_bound(r+i, c+j) and image[r+i][c+j] == orig_col:
+                    que.append([r+i, c+j])
         return image
