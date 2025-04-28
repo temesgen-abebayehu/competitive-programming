@@ -3,10 +3,20 @@ class Solution:
         ans = 0
         row = len(grid)
         col = len(grid[0])
-        for r in range(row-1, -1, -1):
-            for c in range(col-1, -1, -1):
-                if grid[r][c] < 0:
-                    ans += 1
+
+        def binary_search(arr):
+            l = 0
+            r = col - 1
+            while l <= r:
+                m = (l+r)//2
+                if arr[m] < 0:
+                    r = m-1
                 else:
-                    break
+                    l=m+1
+            return l
+
+        for arr in grid:
+            pos = binary_search(arr)
+            ans += col - pos
+
         return ans
