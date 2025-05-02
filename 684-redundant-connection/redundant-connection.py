@@ -5,9 +5,8 @@ class Solution:
         ans = [0] * 2
 
         def find(x):
-            if parent[x] == x:
-                return x
-            parent[x] = find(parent[x])
+            if parent[x] != x:
+                parent[x] = find(parent[x])
             return parent[x]
 
         def union(x, y):
