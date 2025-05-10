@@ -12,8 +12,4 @@ class Solution:
         if zero2 == 0 and sum2 < sum1+zero1:
             return -1
 
-        if sum1 + zero1 > sum2 + zero2:
-            return sum1 + zero1
-
-        else:
-            return sum2 + zero2
+        return max(sum1 + zero1, sum2 + zero2)
