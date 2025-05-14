@@ -1,6 +1,6 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        freq = Counter(nums)
-        for i in freq:
-            if freq[i] == 1:
-                return i
+        res = nums[0]
+        for i in range(1, len(nums)):
+            res = res ^ nums[i]
+        return res
