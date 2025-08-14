@@ -8,6 +8,7 @@ class Solution:
         res = 0
         start = False
         temp = head
+        nums = set(nums)
 
         while temp:
             if temp.val in nums and not start:
