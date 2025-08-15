@@ -1,6 +1,5 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        pre = 0
         curr = 0
 
         for i in range(len(nums)-1):
