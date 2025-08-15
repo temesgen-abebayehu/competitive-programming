@@ -1,10 +1,15 @@
 class Solution:
     def numRabbits(self, answers: List[int]) -> int:
-        count = Counter(answers)
-        
-        total = 0
-        for k, v in count.items():
-            group = ceil(v/(k+1))
-            total += group * (k + 1)
-
-        return total
+        pre = 0
+        res = 0
+        answers.sort()
+        for i in range(len(answers)):
+            if pre == 0:
+                res += answers[i] + 1
+                pre = answers[i]
+            elif pre != 0 and answers[i] != answers[i-1]:
+                res += answers[i] + 1
+                pre = answers[i]
+            else:
+                pre -= 1
+        return res
