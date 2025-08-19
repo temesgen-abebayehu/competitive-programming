@@ -3,20 +3,16 @@ class Solution:
         houses.sort()
         heaters.sort()
         
-        pos = 0
         radius = 0
 
         for h in houses:
-            while pos + 1 < len(heaters) and heaters[pos+1] < h:
-                pos += 1
-
-            r1 = abs(heaters[pos] - h)
-            r2 = float('inf')
-
-            if pos + 1 < len(heaters):
-                r2 = abs(heaters[pos + 1] - h)
-
-            dis = min(r1,r2)
+            pos = bisect.bisect_left(heaters, h)
+            r1, r2 = float('inf'), float('inf')
+            if pos > 0:
+                r1 = abs(h - heaters[pos-1])
+            if pos < len(heaters):
+                r2 = abs(h - heaters[pos])
+            dis = min(r1, r2)
             radius = max(radius, dis)
         
         return radius
