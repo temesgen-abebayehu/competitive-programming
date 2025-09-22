@@ -4,8 +4,6 @@ class Solution:
         n = len(nums)
 
         def dp(i):
-            if i == n-1:
-                return nums[i]
             if i >= n:
                 return 0
             
