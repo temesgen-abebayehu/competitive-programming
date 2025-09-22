@@ -18,8 +18,6 @@ class Solution:
             if (tar,i) in memo:
                 return memo[(tar, i)]
 
-  
-
             memo[(tar, i)] = dp(tar + nums[i], i+1) or dp(tar, i+1)
             return memo[(tar, i)]
 
