@@ -6,19 +6,13 @@ class Solution:
             if i == m-1 and j == n-1:
                 return 1
 
-            if i == m:
-                return 0
-
-            if j == n:
+            if i == m or j == n:
                 return 0
 
             if (i, j) in memo:
                 return memo[(i , j)]
 
-            path1 = dp(i, j+1)
-            path2 = dp(i+1, j)
-
-            res = path1 + path2
+            res = dp(i, j+1) + dp(i+1, j)
 
             memo[(i, j)] = res
             return res
