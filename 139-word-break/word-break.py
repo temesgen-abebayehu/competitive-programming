@@ -1,17 +1,30 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        word_set = set(wordDict)
         n = len(s)
+        words = set(wordDict)
+        memo = {}
+        end = n
 
-        dp = [False] * (n + 1)
-        dp[n] = True
+        def dp(start):
+            if start == n:
+                return True
 
-        for i in range(n - 1, -1, -1):
-            for j in range(i, n):
-                curr_word = s[i : j + 1]
-                
-                if curr_word in word_set and dp[j + 1]:
-                    dp[i] = True
-                    break 
-        
-        return dp[0]
+            if start in memo:
+                return memo[start]
+
+            for end in range(start, n):
+                curr_word = s[start:end + 1]
+
+                if curr_word in words:
+                    if dp(end + 1):
+                        memo[start] = True
+                        return memo[start]
+
+            memo[start] = False
+            return memo[start]
+
+        return dp(0)
+
+            
+
+            
