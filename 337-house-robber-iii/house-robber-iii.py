@@ -15,10 +15,6 @@ class Solution:
             if (node, rob) in memo:
                 return memo[(node, rob)]
 
-            # not take
-            res = max(dp(node.left, rob), dp(node.right, rob))
-
-            # take
             if rob:
                 res = node.val + dp(node.left, not rob) + dp(node.right, not rob)
             else:
