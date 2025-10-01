@@ -1,6 +1,8 @@
 class Solution:
-    def mostPoints(self, questions: List[List[int]]) -> int:
+    def mostPoints(self, questions: List[List[int]]) -> int:        
         n = len(questions)
+        # top-dowm dp
+
         memo = {}
 
         def dp(i):
@@ -10,10 +12,7 @@ class Solution:
             if i in memo:
                 return memo[i]
 
-            # not take
-            res = dp(i+1)
-            # take
-            res = max(res, questions[i][0] + dp(i + questions[i][1] + 1))
+            res = max(dp(i+1), questions[i][0] + dp(i + questions[i][1] + 1))
             
             memo[i] = res
             return res
