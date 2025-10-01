@@ -6,10 +6,10 @@ class Solution:
         dp[n-1] = questions[n-1][0]
 
 
-        for i in range(n-1,-1,-1):            
+        for i in range(n-2,-1,-1):            
             if i + questions[i][1] + 1 < n:
                 dp[i] = max(dp[i+1], questions[i][0] + dp[i + questions[i][1] + 1])
-            elif i+1 < n:
+            else:
                 dp[i] = max(questions[i][0], dp[i+1])
 
 
