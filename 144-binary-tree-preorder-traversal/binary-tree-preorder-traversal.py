@@ -10,11 +10,8 @@ class Solution:
             if not node:
                 return 
             ans.append(node.val)
-            if node.left:
-                dfs(node.left)
-
-            if node.right:
-                dfs(node.right)
+            dfs(node.left)
+            dfs(node.right)
 
         ans = []
         dfs(root)
