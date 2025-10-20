@@ -13,8 +13,7 @@ class Solution:
                         return True
                     
 
-            else:
-                return False
+            return False
 
 
         graph = defaultdict(set)
