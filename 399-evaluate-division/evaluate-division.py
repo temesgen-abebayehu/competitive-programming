@@ -13,11 +13,11 @@ class Solution:
 
             visited.add(start)
 
-            for neighbor in graph[start]:
+            for neighbor, weight in graph[start].items():
                 if neighbor not in visited:
                     result = dfs(neighbor, end, visited)
                     if result != -1.0:
-                        return result * graph[start][neighbor]
+                        return result * weight
             return -1
 
         ans = []
