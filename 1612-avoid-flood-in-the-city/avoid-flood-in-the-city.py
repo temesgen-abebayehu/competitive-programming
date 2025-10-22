@@ -9,7 +9,7 @@ class Solution:
                 result[day] = 1
             else:
                 if lake in full_lake:
-                    d = bisect_left(dry_day, full_lake[lake])
+                    d = bisect_right(dry_day, full_lake[lake])
                     if d<len(dry_day) and dry_day[d] < day:
                         result[dry_day[d]] = lake
                         dry_day.pop(d)
