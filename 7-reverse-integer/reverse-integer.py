@@ -7,4 +7,5 @@ class Solution:
             return  result if result.bit_length()<=31 else 0
         else:
             result = int(''.join(reversed(value)))
-            return result if result.bit_length()<=31 else 0
+            
+        return result if result.bit_length()<=31 else 0
