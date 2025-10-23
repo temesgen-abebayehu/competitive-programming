@@ -5,23 +5,33 @@
 #         self.next = next
 class Solution:
     def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
-        less = ListNode()
-        l_ptr = less                
-        great = ListNode()
-        g_ptr = great
-        curr = head
+        arr = []
+        node  = head
 
-        while curr:
-            if curr.val < x:
-                l_ptr.next = curr
-                l_ptr = l_ptr.next
+        while node:
+            arr.append(node.val)
+            node = node.next
+        
+        idx = bisect_right(arr, x)
+        min_arr = []
+        max_arr = []
+        for e in arr:
+            if e < x:
+                min_arr.append(e)
             else:
-                g_ptr.next = curr
-                g_ptr = g_ptr.next
-
+                max_arr.append(e)
+        
+        dummy = ListNode()
+        curr = dummy
+        for e in min_arr:
+            temp = ListNode(e)
+            curr.next = temp
+            curr = curr.next
+        
+        for e in max_arr:
+            temp = ListNode(e)
+            curr.next = temp
             curr = curr.next
 
-        g_ptr.next = None        
-        l_ptr.next = great.next
+        return dummy.next
         
-        return less.next
