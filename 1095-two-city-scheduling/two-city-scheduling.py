@@ -1,33 +1,28 @@
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
         n = len(costs)
-        diff = []
-        for i, (v1,v2) in enumerate(costs):
-            diff.append([abs(v1-v2), i])
+        sorted_cost = sorted(costs, key=lambda x: abs(x[0]-x[1]), reverse=True)
 
-        diff.sort(reverse=True)
         counta = 0
         countb = 0
         result = 0
         
-        for _, i in diff:
-            if costs[i][0] < costs[i][1] and counta < n//2:
+        for ca, cb in sorted_cost:
+            if (ca < cb and counta < n//2):
                 counta += 1
-                result += costs[i][0]
+                result += ca
 
-            elif costs[i][1] < costs[i][0] and countb < n//2:
+            elif cb < ca and countb < n//2:
                 countb += 1
-                result += costs[i][1]
+                result += cb
 
             elif counta < n//2:
                 counta += 1
-                result += costs[i][0]
+                result += ca
 
             elif countb < n//2:
                 countb += 1
-                result += costs[i][1]
-
-            print(counta, countb)
+                result += cb
 
         return result
 
