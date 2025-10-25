@@ -23,7 +23,7 @@ class Solution:
                 next_node = current.next
                 
                 # Connect current node to child head
-                child_head = current.child
+                child_head = self.flatten(current.child)
                 current.next = child_head
                 child_head.prev = current
                 current.child = None
