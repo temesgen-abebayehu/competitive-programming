@@ -1,17 +1,18 @@
 class Solution:
     def equalFrequency(self, word: str) -> bool:
         freq = Counter(word)
-        result = Counter(freq.values())
         
-        if len(freq) == 1 or (len(result) == 1 and 1 in result.keys()):
-            return True
-
+        for char in word:
+            # Try removing this character
+            freq[char] -= 1
+            if freq[char] == 0:
+                del freq[char]
+            
+            # Check if all remaining frequencies are equal
+            if len(set(freq.values())) == 1:
+                return True
+            
+            # Restore the frequency
+            freq[char] += 1
         
-        if len(result) == 2:
-            key = sorted(list(result.keys()))
-            if key[1] - key[0] == 1 and result[key[1]] == 1:
-                return True
-            if 1 in result.values() and result[1] == 1:
-                return True
-
         return False
