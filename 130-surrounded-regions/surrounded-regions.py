@@ -16,22 +16,17 @@ class Solution:
             dfs(i, j-1)
             dfs(i, j+1)
 
-        # top
+      
         for i in range(cols):
-            if board[0][i] == 'O':
-                dfs(0,i)
-        # bottom
-        for i in range(cols):
-            if board[rows-1][i] == 'O':
-                dfs(rows-1,i)
-        # left
+            dfs(0,i) # top
+            dfs(rows-1,i) # bottom
+        
+                
+        
         for i in range(rows):
-            if board[i][0] == 'O':
-                dfs(i,0)
-        # right
-        for i in range(rows):
-            if board[i][cols-1] == 'O':
-                dfs(i, cols-1)
+            dfs(i,0) # left
+            dfs(i, cols-1) # right
+                
 
         for i in range(rows):
             for j in range(cols):
