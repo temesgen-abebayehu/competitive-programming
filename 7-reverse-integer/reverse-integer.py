@@ -1,11 +1,21 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        value = list(str(x))
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
         
-        if value[0] == '-':
-            result = -1 * int(''.join(reversed(value[1:])))
-            return  result if result.bit_length()<=31 else 0
-        else:
-            result = int(''.join(reversed(value)))
+        sign = -1 if x < 0 else 1
+        x = abs(x)
+        
+        reversed_num = 0
+        while x != 0:
+            digit = x % 10
+            x //= 10
             
-        return result if result.bit_length()<=31 else 0
+            # Check for overflow before actually multiplying
+            # reversed_num * 10 + digit > INT_MAX
+            # reversed_num > (INT_MAX -digit) // 10
+            if reversed_num > (INT_MAX - digit) // 10:
+                return 0
+                
+            reversed_num = reversed_num * 10 + digit
+        
+        return sign * reversed_num        
