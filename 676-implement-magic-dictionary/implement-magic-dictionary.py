@@ -1,11 +1,10 @@
 class MagicDictionary:
 
     def __init__(self):
-        self.words = set()
+        self.words = []
 
     def buildDict(self, dictionary: List[str]) -> None:        
-        for word in dictionary:
-            self.words.add(word)
+        self.words = dictionary
 
     def search(self, searchWord: str) -> bool:
         for word in self.words:
