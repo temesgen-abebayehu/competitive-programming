@@ -1,45 +1,33 @@
-class TrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_end = False
-
 class MagicDictionary:
 
     def __init__(self):
-        self.root = TrieNode()
+        self.words = set()
 
-    def buildDict(self, dictionary: List[str]) -> None:
+    def buildDict(self, dictionary: List[str]) -> None:        
         for word in dictionary:
-            node = self.root
-            for char in word:
-                if char not in node.children:
-                    node.children[char] = TrieNode()
-                node = node.children[char]
-            node.is_end = True
+            self.words.add(word)
 
     def search(self, searchWord: str) -> bool:
-        def dfs(node, index, mismatch_used):
-            if index == len(searchWord):
-                return node.is_end and mismatch_used
+        for word in self.words:
+            if len(word) != len(searchWord):
+                continue
+
+            error = 0
+            for i in range(len(word)):
+                if word[i] != searchWord[i]:
+                    error += 1
+
+                if error > 1:
+                    break
+
+            if error == 1:
+                return True
+
+        return False
             
-            char = searchWord[index]
-            
-            # If we haven't used mismatch yet, try all possible characters
-            if not mismatch_used:
-                for child_char, child_node in node.children.items():
-                    # If character matches, continue without using mismatch
-                    if child_char == char:
-                        if dfs(child_node, index + 1, False):
-                            return True
-                    else:
-                        # Use mismatch for this position
-                        if dfs(child_node, index + 1, True):
-                            return True
-            else:
-                # Mismatch already used, must match exactly
-                if char in node.children:
-                    return dfs(node.children[char], index + 1, True)
-            
-            return False
-        
-        return dfs(self.root, 0, False)
+
+
+# Your MagicDictionary object will be instantiated and called as such:
+# obj = MagicDictionary()
+# obj.buildDict(dictionary)
+# param_2 = obj.search(searchWord)
