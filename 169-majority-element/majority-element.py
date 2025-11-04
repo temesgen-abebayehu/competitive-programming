@@ -1,9 +1,14 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        freq = Counter(nums)
-        major_ele = nums[0]
-        for num in nums:
-            if freq[num] > freq[major_ele]:
-                major_ele = num
+        condidate = nums[0]
+        count = 1
+        for i in range(1, len(nums)):
+            if count == 0:
+                condidate = nums[i]
 
-        return major_ele
+            if condidate == nums[i]:
+                count += 1
+            else:
+                count -= 1
+
+        return condidate
