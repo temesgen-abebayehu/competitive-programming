@@ -1,19 +1,16 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        memo = defaultdict(int)
-        n = len(nums)
+        memo = {}
 
         def dp(i):
-            if i == n-1:
-                return nums[i]
-            if i >= n:
+            if i < 0:
                 return 0
-            
+
             if i in memo:
                 return memo[i]
-            
-            memo[i] = max(nums[i] + dp(i+2), dp(i+1))
-            
+
+            memo[i] = max(nums[i] + dp(i-2), dp(i-1))
+
             return memo[i]
 
-        return dp(0)
+        return dp(len(nums) - 1)
