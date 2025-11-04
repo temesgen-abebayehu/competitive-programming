@@ -9,20 +9,16 @@ class Solution:
         if not root:
             return []
 
-        deq = deque()
-        deq.append(root)
-        ans = [root.val]
-
-        while deq:
-            for i in range(len(deq)):
-                root = deq.popleft()
-                if root.left:
-                    deq.append(root.left)
-
-                if root.right:
-                    deq.append(root.right)
-
-            if deq:
-                ans.append(deq[-1].val)
+        ans = []
+        queue = deque([root])
+        while queue:
+            ans.append(queue[-1].val)
+            size = len(queue)
+            for i in range(size):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
 
         return ans
