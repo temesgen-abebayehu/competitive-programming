@@ -5,21 +5,21 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        def reversedList(node):
+            curr = None
+            while node:
+                temp = node.next
+                node.next = curr
+                curr = node
+                node = temp
+
+            return curr
+
         # 1. reverse the first list
-        curr_l1 = None
-        while l1:
-            temp = l1.next
-            l1.next = curr_l1
-            curr_l1 = l1
-            l1 = temp
+        curr_l1 = reversedList(l1)
         
         # reverse the second list
-        curr_l2 = None
-        while l2:
-            temp = l2.next
-            l2.next = curr_l2
-            curr_l2 = l2
-            l2 = temp
+        curr_l2 = reversedList(l2)
 
         # Add the two reversed list
         node = ListNode()
@@ -43,14 +43,4 @@ class Solution:
             node.next = ListNode(add)
             node = node.next
 
-
-        # revese back the added list
-        curr_add = None
-        node = pre.next
-        while node:
-            temp = node.next
-            node.next = curr_add
-            curr_add = node
-            node = temp
-
-        return curr_add
+        return reversedList(pre.next)
