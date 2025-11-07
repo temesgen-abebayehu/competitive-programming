@@ -8,44 +8,51 @@ class Solution:
         if not head or not head.next:
             return head
 
-        left = head
-        right = self.getMid(head)
-        temp = right.next
+        # 1. Divide: Split the list into two halves.
+        middle = self.get_middle(head)
+        right_half = middle.next
+        middle.next = None  # Sever the link between the two halves
+        left_half = head
 
-        left = self.sortList(left)
-        right = self.sortList(right)
+        # 2. Conquer: Recursively sort both halves.
+        sorted_left = self.sortList(left_half)
+        sorted_right = self.sortList(right_half)
 
-        return self.mergeSort(left,right)
+        # 3. Combine: Merge the two sorted halves.
+        return self.merge(sorted_left, sorted_right)
 
-    def getMid(self, node):
-        slow = node
-        fast = node.next
-
+    def get_middle(self, head):
+        """
+        Finds the middle node of a linked list using the fast and slow pointer technique.
+        """
+        if not head:
+            return None
+        slow, fast = head, head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
+        return slow
 
-        temp = slow.next
-        slow.next = None
-
-        return temp
-        
-    def mergeSort(self, left, right):
+    def merge(self, left, right):
+        """
+        Merges two sorted linked lists into a single sorted linked list.
+        """
         dummy = ListNode()
-        curr = dummy
+        tail = dummy
 
         while left and right:
             if left.val < right.val:
-                curr.next = left
+                tail.next = left
                 left = left.next
             else:
-                curr.next = right
+                tail.next = right
                 right = right.next
-            curr = curr.next
-        
+            tail = tail.next
+
+        # Attach the remaining part of the list
         if left:
-            curr.next = left
-        if right:
-            curr.next = right
-        
+            tail.next = left
+        elif right:
+            tail.next = right
+
         return dummy.next
